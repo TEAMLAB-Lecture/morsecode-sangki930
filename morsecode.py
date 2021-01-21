@@ -89,15 +89,15 @@ def is_validated_english_sentence(user_input):
     
     if bool(re.search(r'\d', user_input)):
     # 숫자가 포함되어 있는 지
-        return True
+        return False
     if re.search(reg,user_input):
     # 문장부호를 제외한 특수문자가 포함되는 지
         return False
     text=re.sub('\s','',user_input)
     if len(text)==0:
     # 빈 칸 또는 빈 문자열을 입력했는 지
-        return True
-    return False
+        return False
+    return True
     # ==================================
 
 
@@ -131,7 +131,7 @@ def is_validated_morse_code(user_input):
     if len(text)>0 :
         return False
     morse_code = get_morse_code_dict()
-    if user_input not in morse_code:
+    if not(user_input in morse_code):
         return False
     return True
     # ==================================
