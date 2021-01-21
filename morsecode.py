@@ -131,8 +131,11 @@ def is_validated_morse_code(user_input):
     if len(text)>0 :
         return False
     morse_code = get_morse_code_dict().values()
-    if not(user_input in morse_code):
-        return False
+
+    for i in user_input.split():
+        if i not in morse_code:
+            return False
+    
     return True
     # ==================================
 
@@ -246,10 +249,13 @@ def decoding_sentence(morse_sentence):
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
     
     result=''
-    for i in morse_sentence.split():
-            result+=decoding_character(i)+' '
+    for i in morse_sentence.split(' '):
+        if i=='':
+            result+=' '
+        else:
+            result+=decoding_character(i)
 
-    return result.rstrip()
+    return result
     # ==================================
 
 
@@ -273,6 +279,7 @@ def encoding_sentence(english_sentence):
     """
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
+    english_sentence=' '.join(english_sentence.split())
     result=''
     for i in english_sentence:
         if i in [' ','.',',','!','?']:
