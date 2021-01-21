@@ -92,7 +92,7 @@ def is_validated_english_sentence(user_input):
         return True
     if re.search(reg,user_input):
     # 문장부호를 제외한 특수문자가 포함되는 지
-        return True
+        return False
     text=re.sub('\s','',user_input)
     if len(text)==0:
     # 빈 칸 또는 빈 문자열을 입력했는 지
@@ -131,7 +131,7 @@ def is_validated_morse_code(user_input):
     if len(text)>0 :
         return False
     morse_code = get_morse_code_dict()
-    if text not in morse_code:
+    if user_input not in morse_code:
         return False
     return True
     # ==================================
@@ -157,7 +157,7 @@ def get_cleaned_english_sentence(raw_english_sentence):
     """
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
-    result=re.sub(".,!?",'',raw_english_sentence).strip()
+    result=re.sub("[.,!?]",'',raw_english_sentence).strip()
     return result
     # ==================================
 
