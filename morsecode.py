@@ -282,8 +282,6 @@ def encoding_sentence(english_sentence):
     english_sentence=' '.join(english_sentence.split()).rstrip()
     result=''
     for i in english_sentence:
-        if i==' ':
-            continue
         if i in ['.',',','!','?']:
             result+=' '
         else:
