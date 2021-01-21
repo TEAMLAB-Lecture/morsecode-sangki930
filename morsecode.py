@@ -85,12 +85,12 @@ def is_validated_english_sentence(user_input):
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
     result = None
-    reg='[_@#$%^&*()-+={}\[\]"\';:\|`~]'
     
+    reg='_@#$%^&*()-+=[]\{\}\"\';:\|`~'
     if bool(re.search(r'\d', user_input)):
     # 숫자가 포함되어 있는 지
         return False
-    if re.search(reg,user_input):
+    if any(a in user_input for a in reg):
     # 문장부호를 제외한 특수문자가 포함되는 지
         return False
     text=re.sub('[.,?!]|\s','',user_input)
@@ -302,6 +302,7 @@ def main():
         exit=False
         while True:
             i=input("Input your message(H - Help, 0 - Exit):")
+            # print(is_validated_english_sentence(i))
             if i=='0':
                 exit=True
                 break
@@ -320,9 +321,9 @@ def main():
                 continue
         if exit:
             break
-        if is_validated_english_sentence(i):
+        if is_validated_english_sentence(i) and not is_validated_morse_code(i):
             print(encoding_sentence(i))
-        elif is_validated_morse_code(i):
+        elif is_validated_morse_code(i) and not is_validated_english_sentence(i):
             print(decoding_sentence(i))
             
 
